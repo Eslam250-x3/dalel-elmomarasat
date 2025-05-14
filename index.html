@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أفضل الممارسات لصياغة الأوامر - دليل شامل</title>
+    <style>
+        /* CSS Styles - مع تحسينات جمالية وإبداعية */
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Tajawal:wght@300;400;500;700&display=swap');
+
+        :root {
+            --primary-color: #0056b3;
+            --secondary-color: #4A5568;
+            --background-color: #f4f7f6;
+            --card-background: #ffffff;
+            --text-color: #2D3748;
+            --light-text-color: #ffffff;
+            --accent-color: #38A169;
+            --accent-color-light: #a7e0c0;
+            --warning-color: #ffc107; 
+            --info-color: #17a2b8;   
+            --border-radius: 12px;
+            --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            --transition-speed: 0.4s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            line-height: 1.9;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            direction: rtl;
+            padding-top: 110px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #007bff);
+            color: var(--light-text-color);
+            padding: 20px 0;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+        }
+        header h1 .icon {
+            margin-left: 10px; 
+            font-size: 1em; 
+        }
+
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        nav ul li {
+            display: inline-block;
+            margin: 0 12px;
+        }
+
+        nav ul li a {
+            color: var(--light-text-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: var(--border-radius);
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, color var(--transition-speed) ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex; 
+            align-items: center;
+        }
+        nav ul li a .icon {
+            margin-left: 8px; 
+            font-size: 0.9em; 
+        }
+        nav ul li a::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-color-light);
+            transition: all var(--transition-speed) ease-out;
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover::before,
+        nav ul li a.active::before {
+            width: 70%;
+        }
+        nav ul li a.active {
+             color: var(--accent-color-light);
+        }
+
+
+        .page-title {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 20px; 
+            font-size: 2.6em;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .page-title::after {
+            content: '✨';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5em;
+            color: var(--accent-color);
+        }
+        
+        /* --- تعديل تنسيق مشغل الصوت --- */
+        .audio-summary-container {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border-left: 5px solid var(--accent-color);
+        }
+        .audio-summary-container p {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .audio-summary-container p .icon {
+            margin-left: 8px;
+            font-size: 1.2em;
+        }
+        .audio-summary-container audio {
+            width: 100%; /* جعل المشغل يمتد بعرض الحاوية */
+            max-width: 500px; /* حد أقصى لعرض المشغل */
+            margin-top: 10px;
+            border-radius: 5px; /* يمكن إضافة بعض التعديلات على مظهر المشغل الافتراضي */
+        }
+        /* لتخصيص مظهر المشغل بشكل أكبر، يتطلب الأمر استخدام CSS معقد أو مكتبات JS */
+        /* هذه تنسيقات أساسية */
+        .audio-summary-container audio::-webkit-media-controls-panel {
+            background-color: #eef2f5; /* لون خلفية لوحة التحكم */
+            border-radius: var(--border-radius);
+        }
+        .audio-summary-container audio::-webkit-media-controls-play-button,
+        .audio-summary-container audio::-webkit-media-controls-volume-slider-container {
+            /* يمكن إضافة بعض التنسيقات هنا */
+        }
+
+        .content-page {
+            display: none;
+            animation: fadeIn 0.6s ease-out;
+        }
+        .content-page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .intro-text, .conclusion-text {
+            background-color: var(--card-background);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+            font-size: 1.15em;
+            text-align: justify;
+            border-left: 5px solid var(--accent-color);
+        }
+        .conclusion-text {
+            border-left-color: var(--primary-color); /* تمييز مختلف للخلاصة */
+        }
+
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 2em;
+            font-weight: 600;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 12px;
+            display: inline-flex; 
+            align-items: center;
+        }
+        .section-title .icon {
+            margin-left: 10px; 
+            font-size: 0.9em; 
+            color: var(--accent-color); 
+        }
+        .conclusion-text .section-title {
+            border-bottom-color: var(--primary-color); /* مطابقة لون حد الخلاصة */
+        }
+        .conclusion-text .section-title .icon {
+            color: var(--primary-color); /* مطابقة لون أيقونة الخلاصة */
+        }
+
+
+        .clear-framework, .openai-strategies, .expert-tips {
+            display: grid;
+            gap: 30px;
+        }
+
+        .card-item {
+            background-color: var(--card-background);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            position: relative;
+            overflow: hidden;
+            border-top: 4px solid transparent;
+        }
+        
+        .card-item h3 {
+             cursor: pointer;
+             color: var(--primary-color);
+             margin-bottom: 12px;
+             font-size: 1.5em;
+             font-weight: 600;
+             display: flex;
+             align-items: center; 
+        }
+        
+        .clear-item { border-top-color: var(--primary-color); }
+        .strategy-card { border-top-color: var(--warning-color); }
+        .tip-item { border-top-color: var(--info-color); }
+
+
+        .card-item:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-item h3 .icon {
+            margin-left: 12px;
+            font-size: 1.1em; 
+            color: var(--accent-color);
+            transition: transform var(--transition-speed) ease;
+            flex-shrink: 0; 
+        }
+        .card-item.active h3 .icon {
+            transform: rotate(90deg);
+        }
+
+
+        .card-item .details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-in-out, padding var(--transition-speed) ease-in-out, opacity 0.6s ease-in-out;
+            padding-top: 0;
+            opacity: 0;
+            font-size: 0.95em;
+            color: var(--secondary-color);
+        }
+
+        .card-item.active .details {
+            max-height: 600px;
+            padding-top: 20px;
+            opacity: 1;
+        }
+
+        .example {
+            background-color: #eef2f5;
+            padding: 15px;
+            border-radius: calc(var(--border-radius) - 4px);
+            margin-top: 15px;
+            font-style: normal;
+            border-right: 4px solid var(--accent-color);
+            position: relative;
+        }
+        .example::before {
+            content: "💡";
+            position: absolute;
+            top: 10px;
+            right: -15px;
+            font-size: 1.3em;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 3px 6px;
+            border-radius: 50%;
+        }
+
+        .example strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .openai-strategies {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        .expert-tips {
+            grid-template-columns: 1fr;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: var(--secondary-color);
+            color: #e2e8f0;
+            margin-top: 60px;
+            font-size: 0.95em;
+        }
+        footer p {
+            margin-bottom: 8px;
+        }
+        footer a {
+            color: var(--accent-color-light);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .openai-strategies {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 0; } /* إزالة الـ padding إذا أصبح الهيدر static */
+            header { position: relative; /* أو static، جعل الهيدر غير ثابت لتحسين العرض على الجوال */ }
+            
+            header h1 { font-size: 1.7em; }
+             nav ul {
+                display: flex; 
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            nav ul li { margin: 5px; }
+            nav ul li a { padding: 8px 10px; font-size: 0.85em; }
+            
+            .page-title { font-size: 2em; }
+            .audio-summary-container p { font-size: 1em; }
+            .clear-framework, .openai-strategies { grid-template-columns: 1fr; }
+            .card-item:hover { transform: translateY(-5px) scale(1.01); }
+        }
+         @media (max-width: 480px) {
+            header h1 { font-size: 1.4em; }
+            nav ul li { margin: 3px; }
+            nav ul li a { padding: 7px 8px; font-size: 0.8em; }
+            nav ul li a .icon { margin-left: 5px; font-size: 0.8em; }
+
+            .page-title { font-size: 1.7em; }
+            .audio-summary-container { padding: 10px; }
+            .audio-summary-container p { font-size: 0.9em; }
+            .intro-text, .conclusion-text { padding: 20px; font-size: 1em; }
+            .card-item { padding: 20px; }
+            .card-item h3 { font-size: 1.3em; }
+            .card-item h3 .icon { margin-left: 8px; font-size: 1em; }
+            .example { padding: 10px; }
+            .example::before { right: -12px; font-size: 1.1em; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><span class="icon">🚀</span> دليل صياغة الأوامر الذكية</h1>
+        <nav>
+            <ul>
+                <li><a data-target="page-clear" class="active"><span class="icon">📝</span> إطار CLEAR</a></li>
+                <li><a data-target="page-openai"><span class="icon">💡</span> استراتيجيات OpenAI</a></li>
+                <li><a data-target="page-tips"><span class="icon">🛠️</span> نصائح الخبراء</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- الصفحة الأولى: إطار CLEAR -->
+        <div id="page-clear" class="content-page active">
+            <h2 class="page-title">إتقان فن صياغة الأوامر: إطار CLEAR</h2>
+            
+            <!-- حاوية الملخص الصوتي المدمج -->
+            <div class="audio-summary-container">
+                <p><span class="icon">🎧</span> استمع إلى ملخص هذه الصفحة:</p>
+                <audio controls>
+                    <source src="https://dl.dropboxusercontent.com/scl/fi/2vuytk3g5x0qf9i73ov9r/.wav?rlkey=6jlodouk740pz1sqoizscg3ov&st=reslplyd&dl=0" type="audio/wav">
+                    متصفحك لا يدعم عنصر الصوت. يمكنك <a href="https://dl.dropboxusercontent.com/scl/fi/2vuytk3g5x0qf9i73ov9r/.wav?rlkey=6jlodouk740pz1sqoizscg3ov&st=reslplyd&dl=0" target="_blank">تنزيل الملف الصوتي من هنا</a>.
+                </audio>
+            </div>
+
+            <div class="intro-text">
+                <p>لتحقيق أقصى استفادة من نماذج الذكاء الاصطناعي، لا يكفي فقط معرفة التقنيات المختلفة، بل يجب أيضًا اتباع أفضل الممارسات في صياغة الأوامر. تساهم هذه الممارسات في توجيه النموذج بشكل أكثر دقة نحو المخرجات المطلوبة، مما يعزز جودة المحتوى المنتج.</p>
+            </div>
+            <section class="section">
+                <h2 class="section-title"> <span class="icon">🔍</span> إطار CLEAR لكتابة الأوامر</h2>
+                <p>يقدم إطار "CLEAR" مجموعة من المبادئ التوجيهية لإنشاء أوامر فعالة. يتكون هذا الإطار من خمسة عناصر أساسية:</p>
+                <div class="clear-framework">
+                    <div class="card-item clear-item">
+                        <h3><span class="icon">🎯</span> موجز (Concise)</h3>
+                        <div class="details">
+                            <p>يجب أن تكون الأوامر مختصرة وواضحة، مع إزالة أي لغة غير ضرورية. هذا يساعد الذكاء الاصطناعي على التركيز على المكونات الرئيسية للمهمة.</p>
+                            <div class="example"><strong>مثال:</strong> بدلاً من "أرجو منك تقديم شرح مفصل حول مفهوم الإنتروبيا وأهميته"، يمكن استخدام أمر أكثر إيجازًا: "اشرح الإنتروبيا وأهميتها".</div>
+                        </div>
+                    </div>
+                    <div class="card-item clear-item">
+                        <h3><span class="icon">🔗</span> منطقي (Logical)</h3>
+                        <div class="details">
+                            <p>يجب أن تكون الأوامر منظمة ومتماسكة، مما يخلق تدفقًا منطقيًا للأفكار.</p>
+                            <div class="example"><strong>مثال:</strong> "اشرح خطوات بناء أمر جيد، بدءًا من كيفية تطوير موضوع أو سؤال وصولاً إلى استرداد نتيجة الأمر".</div>
+                        </div>
+                    </div>
+                    <div class="card-item clear-item">
+                        <h3><span class="icon">🗣️</span> صريح (Explicit)</h3>
+                        <div class="details">
+                            <p>يجب أن تتضمن الأوامر مواصفات واضحة للمخرجات، مع تقديم تفاصيل دقيقة حول التنسيق أو المحتوى أو النطاق المطلوب.</p>
+                            <div class="example"><strong>مثال:</strong> "قدم نصًا لبودكاست مدته 25 دقيقة يلخص بإيجاز مفهوم الإنتروبيا واكتشافه وتأثيره".</div>
+                        </div>
+                    </div>
+                    <div class="card-item clear-item">
+                        <h3><span class="icon">🔄</span> متكيف (Adaptive)</h3>
+                        <div class="details">
+                            <p>يجب أن تسمح الأوامر بالمرونة والتخصيص لتنقيح الأمر الأولي. إذا لم تحقق النتائج الأولية الهدف، يمكن تعديل الأمر ليكون أكثر تحديدًا أو لتغيير التركيز.</p>
+                            <div class="example"><strong>مثال:</strong> إذا كان الأمر "قدم نصًا لبودكاست مدته 25 دقيقة..." قد أسفر عن نتائج غامضة، قد يكون الأمر التكيفي: "كيف ينطبق مفهوم الإنتروبيا في علم الأحياء وموت الخلايا المبرمج؟".</div>
+                        </div>
+                    </div>
+                    <div class="card-item clear-item">
+                        <h3><span class="icon">🤔</span> تأملي (Reflective)</h3>
+                        <div class="details">
+                            <p>يتضمن ذلك التقييم والتحسين المستمر للأوامر للوصول في النهاية إلى النتائج التي ستكون مفيدة. هذا يتماشى مع مبدأ التكرار والتحسين.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- الصفحة الثانية: استراتيجيات OpenAI -->
+        <div id="page-openai" class="content-page">
+            <h2 class="page-title">استراتيجيات OpenAI المتقدمة لنتائج مبهرة</h2>
+            <p class="intro-text">تقدم OpenAI مجموعة من الاستراتيجيات التي أثبتت فعاليتها في تحسين جودة المخرجات من نماذجها اللغوية. تطبيق هذه الاستراتيجيات يفتح آفاقًا جديدة للإبداع والدقة.</p>
+            <div class="openai-strategies">
+                <div class="card-item strategy-card">
+                    <h3><span class="icon">✍️</span> 1. كتابة تعليمات واضحة</h3>
+                    <div class="details">
+                        <p>يجب أن تكون التعليمات مفصلة ومحددة. يمكن أن يشمل ذلك تحديد الجمهور المستهدف، أو النبرة المطلوبة، أو تنسيق المخرجات، أو حتى مطالبة النموذج بتبني شخصية معينة (مثل "أنت خبير في تاريخ الفن").</p>
+                    </div>
+                </div>
+                <div class="card-item strategy-card">
+                    <h3><span class="icon">📚</span> 2. توفير نص مرجعي</h3>
+                    <div class="details">
+                        <p>يمكن توجيه النموذج للإجابة بناءً على نص مرجعي محدد يتم تقديمه، أو حتى لتقديم اقتباسات من هذا النص. هذا يساعد في تقليل احتمالية توليد معلومات غير دقيقة أو "هلوسات".</p>
+                    </div>
+                </div>
+                <div class="card-item strategy-card">
+                    <h3><span class="icon">🧩</span> 3. تقسيم المهام المعقدة</h3>
+                    <div class="details">
+                        <p>تمامًا كما في هندسة البرمجيات، يمكن أن يؤدي تقسيم المهام المعقدة إلى مكونات أصغر وأبسط إلى تقليل معدلات الخطأ وتحسين جودة المخرجات.</p>
+                    </div>
+                </div>
+                <div class="card-item strategy-card">
+                    <h3><span class="icon">⏳</span> 4. إعطاء النموذج وقتًا "للتفكير"</h3>
+                    <div class="details">
+                        <p>يمكن أن يؤدي مطالبة النموذج بالتفكير خطوة بخطوة أو العمل على حل المشكلة داخليًا قبل تقديم الإجابة النهائية إلى تحسين موثوقية الإجابات، خاصة للمهام التي تتطلب تفكيرًا منطقيًا.</p>
+                    </div>
+                </div>
+                <div class="card-item strategy-card">
+                    <h3><span class="icon">🛠️</span> 5. استخدام أدوات خارجية</h3>
+                    <div class="details">
+                        <p>يمكن تعويض نقاط ضعف النموذج من خلال تزويده بمخرجات أدوات أخرى. على سبيل المثال، يمكن استخدام نظام استرجاع نصوص لتزويد النموذج بمعلومات ذات صلة، أو محرك تنفيذ أكواد لإجراء حسابات دقيقة.</p>
+                    </div>
+                </div>
+                <div class="card-item strategy-card">
+                    <h3><span class="icon">📊</span> 6. اختبار التغييرات بشكل منهجي</h3>
+                    <div class="details">
+                        <p>من الضروري قياس تأثير أي تعديلات على الأوامر. قد يؤدي تعديل ما إلى تحسين الأداء في أمثلة قليلة ولكنه يضر بالأداء العام. لذا، يُنصح بتقييم المخرجات بناءً على مجموعة متنوعة من الأمثلة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الصفحة الثالثة: نصائح إضافية -->
+        <div id="page-tips" class="content-page">
+            <h2 class="page-title">نصائح الخبراء الذهبية وخلاصة شاملة</h2>
+            <p class="intro-text">بالإضافة إلى الأطر والاستراتيجيات المذكورة، هناك العديد من النصائح العملية التي يوصي بها الخبراء لتحسين جودة الأوامر. هذه النصائح هي خلاصة تجارب عملية ومفتاحك لنتائج احترافية.</p>
+            <div class="expert-tips">
+                <div class="card-item tip-item"><h3><span class="icon">🧠</span> فهم قدرات النموذج وحدوده</h3><div class="details"><p>معرفة ما يجيده النموذج وما هي نقاط ضعفه يساعد في تكييف الأوامر بشكل أفضل.</p></div></div>
+                <div class="card-item tip-item"><h3><span class="icon">🚧</span> استخدام المحددات (Delimiters)</h3><div class="details"><p>يمكن استخدام علامات ترقيم خاصة (مثل ```, ###, <>) لتحديد أجزاء مختلفة من المدخلات بوضوح، مما يساعد النموذج على فهم بنية الأمر.</p></div></div>
+                <div class="card-item tip-item"><h3><span class="icon">🤫</span> تجنب المصطلحات المتخصصة والأسئلة الموجهة</h3><div class="details"><p>استخدم لغة بسيطة ومباشرة ما لم تكن تخاطب النموذج كخبير في مجال معين. تجنب الأسئلة التي قد تحيز استجابة النموذج.</p></div></div>
+                <div class="card-item tip-item"><h3><span class="icon">🎯</span> تحديد الهدف، إنشاء سيناريو، وتشجيع التحليل</h3><div class="details"><p>تحديد هدف واضح للأمر، ووضعه في سيناريو محدد، وتشجيع النموذج على تحليل الخيارات يمكن أن يؤدي إلى استجابات أكثر عمقًا وتفكيرًا.</p></div></div>
+                <div class="card-item tip-item"><h3><span class="icon">📅</span> تحديد الإطار الزمني والتنسيق</h3><div class="details"><p>إذا كان الوقت عاملاً مهمًا أو إذا كنت تحتاج إلى المخرجات بتنسيق معين (مثل قائمة، جدول، فقرات)، فحدد ذلك بوضوح في الأمر.</p></div></div>
+                <div class="card-item tip-item"><h3><span class="icon">📜</span> اقتباس المصادر</h3><div class="details"><p>مطالبة النموذج بذكر مصادره يمكن أن يساعد في تقليل "الهلوسات" وزيادة الموثوقية.</p></div></div>
+                <div class="card-item tip-item"><h3><span class="icon">🔁</span> البدء ببساطة والتكرار</h3><div class="details"><p>ابدأ بأوامر بسيطة ثم قم بزيادة التعقيد تدريجيًا. لا تتردد في تجربة صياغات مختلفة ومراجعتها بناءً على النتائج.</p></div></div>
+                <div class="card-item tip-item"><h3><span class="icon">👶</span> التعامل مع النموذج كطفل ذكي</h3><div class="details"><p>قدم تعليمات واضحة ومنظمة كما لو كنت تخاطب طفلاً ذكيًا ولكنه يفتقر إلى الخبرة والسياق. استخدم القوائم للطلبات المعقدة.</p></div></div>
+            </div>
+            <div class="conclusion-text">
+                <h2 class="section-title"> <span class="icon">🏁</span> خلاصة وتطلعات مستقبلية</h2>
+                <p>من خلال تطبيق هذه الممارسات، يمكن للمصممين التعليميين والمبدعين تحسين قدرتهم بشكل كبير على صياغة أوامر فعالة، مما يؤدي إلى مخرجات ذات جودة أعلى وأكثر ملاءمة لأهدافهم. الاستثمار في تعلم هذه المهارات هو استثمار في مستقبل التفاعل مع الذكاء الاصطناعي.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>تصميم وتطوير: <strong>إسلام محمد</strong></p>
+        <p><a href="mailto:eslam.mohamed@nagwa.com">eslam.mohamed@nagwa.com</a></p>
+        <p>&copy; 2024 - جميع الحقوق محفوظة لدليل صياغة الأوامر الذكية.</p>
+    </footer>
+
+    <script>
+        // JavaScript code remains the same as the previous version.
+        document.addEventListener('DOMContentLoaded', () => {
+            const interactiveItems = document.querySelectorAll('.card-item');
+            interactiveItems.forEach(item => {
+                const titleElement = item.querySelector('h3');
+                if (titleElement) {
+                    titleElement.addEventListener('click', () => {
+                        item.classList.toggle('active');
+                        const details = item.querySelector('.details');
+                        if (details) {
+                            const isExpanded = item.classList.contains('active');
+                            titleElement.setAttribute('aria-expanded', isExpanded.toString());
+                            details.setAttribute('aria-hidden', (!isExpanded).toString());
+                        }
+                    });
+                    const details = item.querySelector('.details');
+                    if (details) {
+                        titleElement.setAttribute('aria-expanded', 'false');
+                        details.setAttribute('aria-hidden', 'true');
+                        titleElement.setAttribute('role', 'button');
+                        titleElement.setAttribute('tabindex', '0');
+                        titleElement.addEventListener('keydown', (event) => {
+                            if (event.key === 'Enter' || event.key === ' ') {
+                                event.preventDefault();
+                                titleElement.click();
+                            }
+                        });
+                    }
+                }
+            });
+
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const contentPages = document.querySelectorAll('.content-page');
+
+            function showPage(targetId) {
+                contentPages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                const targetPage = document.getElementById(targetId);
+                if (targetPage) {
+                    targetPage.classList.add('active');
+                }
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.target === targetId) {
+                        link.classList.add('active');
+                    }
+                });
+                // Scroll to top only if not clicking on an accordion or similar interactive element within the page
+                // For simplicity, we scroll on every page change.
+                // For more complex scenarios, you might want to check the event target.
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    const targetId = link.dataset.target;
+                    if (targetId) {
+                        showPage(targetId);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
