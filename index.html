@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -6,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أفضل الممارسات لصياغة الأوامر - دليل شامل</title>
     <style>
-        /* CSS Styles - مع تحسينات جمالية وإبداعية */
+        /* CSS Styles - (نفس الأنماط السابقة مع تعديلات طفيفة للزر المخصص) */
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Tajawal:wght@300;400;500;700&display=swap');
 
         :root {
@@ -16,20 +15,16 @@
             --card-background: #ffffff;
             --text-color: #2D3748;
             --light-text-color: #ffffff;
-            --accent-color: #38A169;
-            --accent-color-light: #a7e0c0;
-            --warning-color: #ffc107; 
-            --info-color: #17a2b8;   
+            --accent-color: #38A169; /* أخضر للزر */
+            --accent-color-dark: #2a7f53; /* أخضر أغمق لل hover */
+            --danger-color: #dc3545; /* أحمر لزر الإيقاف إذا أردنا تمييزه */
             --border-radius: 12px;
             --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            --transition-speed: 0.4s;
+            --transition-speed: 0.3s; /* تسريع الانتقالات قليلاً للزر */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        /* ... (بقية أنماط CSS كما هي من الإصدار السابق) ... */
+        /* ... (تأكد من نسخ جميع الأنماط من الأعلى حتى هنا) ... */
 
         body {
             font-family: 'Cairo', 'Tajawal', sans-serif;
@@ -145,45 +140,65 @@
             font-size: 1.5em;
             color: var(--accent-color);
         }
-        
-        /* --- تعديل تنسيق مشغل الصوت --- */
+
+
+        /* --- تعديل حاوية الملخص الصوتي والزر المخصص --- */
         .audio-summary-container {
             text-align: center;
             margin-bottom: 30px;
-            padding: 15px;
+            padding: 20px;
             background-color: var(--card-background);
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
             border-left: 5px solid var(--accent-color);
         }
-        .audio-summary-container p {
-            font-size: 1.1em;
+        .audio-summary-container .summary-title { /* تم تغيير اسم الكلاس من p */
+            font-size: 1.2em; /* زيادة حجم الخط قليلاً */
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 10px;
+            margin-bottom: 15px; /* زيادة المسافة للزر */
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .audio-summary-container p .icon {
-            margin-left: 8px;
-            font-size: 1.2em;
+        .audio-summary-container .summary-title .icon {
+            margin-left: 10px; /* زيادة المسافة للأيقونة */
+            font-size: 1.3em; /* تكبير الأيقونة قليلاً */
         }
-        .audio-summary-container audio {
-            width: 100%; /* جعل المشغل يمتد بعرض الحاوية */
-            max-width: 500px; /* حد أقصى لعرض المشغل */
-            margin-top: 10px;
-            border-radius: 5px; /* يمكن إضافة بعض التعديلات على مظهر المشغل الافتراضي */
-        }
-        /* لتخصيص مظهر المشغل بشكل أكبر، يتطلب الأمر استخدام CSS معقد أو مكتبات JS */
-        /* هذه تنسيقات أساسية */
-        .audio-summary-container audio::-webkit-media-controls-panel {
-            background-color: #eef2f5; /* لون خلفية لوحة التحكم */
+        
+        .play-pause-button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 25px; /* زيادة الحجم قليلاً */
             border-radius: var(--border-radius);
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 180px; /* تحديد عرض أدنى للزر ليكون متناسقًا */
         }
-        .audio-summary-container audio::-webkit-media-controls-play-button,
-        .audio-summary-container audio::-webkit-media-controls-volume-slider-container {
-            /* يمكن إضافة بعض التنسيقات هنا */
+        .play-pause-button .icon {
+            margin-left: 10px;
+            font-size: 1.2em;
+            transition: transform var(--transition-speed) ease; /* لإضافة تأثير دوران للأيقونة */
+        }
+        .play-pause-button:hover {
+            background-color: var(--accent-color-dark);
+            transform: translateY(-2px);
+        }
+        .play-pause-button.playing { /* كلاس يضاف عند التشغيل */
+            background-color: var(--danger-color); /* يمكن تغيير اللون عند التشغيل */
+        }
+        .play-pause-button.playing:hover {
+            background-color: #c82333; /* لون أغمق عند المرور وهو في حالة التشغيل */
+        }
+        .play-pause-button.playing .icon {
+            /* يمكن تغيير الأيقونة هنا إذا أردت، أو إضافة تأثير دوران مستمر */
+            /* مثال: transform: rotate(360deg); */
         }
 
         .content-page {
@@ -210,7 +225,7 @@
             border-left: 5px solid var(--accent-color);
         }
         .conclusion-text {
-            border-left-color: var(--primary-color); /* تمييز مختلف للخلاصة */
+            border-left-color: var(--primary-color); 
         }
 
 
@@ -234,10 +249,10 @@
             color: var(--accent-color); 
         }
         .conclusion-text .section-title {
-            border-bottom-color: var(--primary-color); /* مطابقة لون حد الخلاصة */
+            border-bottom-color: var(--primary-color); 
         }
         .conclusion-text .section-title .icon {
-            color: var(--primary-color); /* مطابقة لون أيقونة الخلاصة */
+            color: var(--primary-color); 
         }
 
 
@@ -366,8 +381,8 @@
         }
 
         @media (max-width: 768px) {
-            body { padding-top: 0; } /* إزالة الـ padding إذا أصبح الهيدر static */
-            header { position: relative; /* أو static، جعل الهيدر غير ثابت لتحسين العرض على الجوال */ }
+            body { padding-top: 0; } 
+            header { position: relative; }
             
             header h1 { font-size: 1.7em; }
              nav ul {
@@ -379,7 +394,8 @@
             nav ul li a { padding: 8px 10px; font-size: 0.85em; }
             
             .page-title { font-size: 2em; }
-            .audio-summary-container p { font-size: 1em; }
+            .audio-summary-container .summary-title { font-size: 1.1em; }
+            .play-pause-button { padding: 10px 20px; font-size: 0.9em; min-width: 160px;}
             .clear-framework, .openai-strategies { grid-template-columns: 1fr; }
             .card-item:hover { transform: translateY(-5px) scale(1.01); }
         }
@@ -390,8 +406,12 @@
             nav ul li a .icon { margin-left: 5px; font-size: 0.8em; }
 
             .page-title { font-size: 1.7em; }
-            .audio-summary-container { padding: 10px; }
-            .audio-summary-container p { font-size: 0.9em; }
+            .audio-summary-container { padding: 15px; }
+            .audio-summary-container .summary-title { font-size: 1em; }
+            .play-pause-button { padding: 10px 15px; font-size: 0.85em; min-width: auto;}
+            .play-pause-button .icon { margin-left: 8px; }
+
+
             .intro-text, .conclusion-text { padding: 20px; font-size: 1em; }
             .card-item { padding: 20px; }
             .card-item h3 { font-size: 1.3em; }
@@ -418,13 +438,17 @@
         <div id="page-clear" class="content-page active">
             <h2 class="page-title">إتقان فن صياغة الأوامر: إطار CLEAR</h2>
             
-            <!-- حاوية الملخص الصوتي المدمج -->
+            <!-- حاوية الملخص الصوتي مع زر مخصص -->
             <div class="audio-summary-container">
-                <p><span class="icon">🎧</span> استمع إلى ملخص هذه الصفحة:</p>
-                <audio controls>
+                <p class="summary-title"><span class="icon">🎧</span> استمع إلى ملخص هذه الصفحة:</p>
+                <audio id="pageSummaryAudio">
                     <source src="https://dl.dropboxusercontent.com/scl/fi/2vuytk3g5x0qf9i73ov9r/.wav?rlkey=6jlodouk740pz1sqoizscg3ov&st=reslplyd&dl=0" type="audio/wav">
-                    متصفحك لا يدعم عنصر الصوت. يمكنك <a href="https://dl.dropboxusercontent.com/scl/fi/2vuytk3g5x0qf9i73ov9r/.wav?rlkey=6jlodouk740pz1sqoizscg3ov&st=reslplyd&dl=0" target="_blank">تنزيل الملف الصوتي من هنا</a>.
+                    متصفحك لا يدعم عنصر الصوت.
                 </audio>
+                <button id="playPauseBtn" class="play-pause-button">
+                    <span class="icon play-icon">▶️</span>
+                    <span class="button-text">تشغيل الملخص</span>
+                </button>
             </div>
 
             <div class="intro-text">
@@ -434,7 +458,8 @@
                 <h2 class="section-title"> <span class="icon">🔍</span> إطار CLEAR لكتابة الأوامر</h2>
                 <p>يقدم إطار "CLEAR" مجموعة من المبادئ التوجيهية لإنشاء أوامر فعالة. يتكون هذا الإطار من خمسة عناصر أساسية:</p>
                 <div class="clear-framework">
-                    <div class="card-item clear-item">
+                    <!-- ... (بطاقات CLEAR كما هي) ... -->
+                     <div class="card-item clear-item">
                         <h3><span class="icon">🎯</span> موجز (Concise)</h3>
                         <div class="details">
                             <p>يجب أن تكون الأوامر مختصرة وواضحة، مع إزالة أي لغة غير ضرورية. هذا يساعد الذكاء الاصطناعي على التركيز على المكونات الرئيسية للمهمة.</p>
@@ -474,7 +499,8 @@
 
         <!-- الصفحة الثانية: استراتيجيات OpenAI -->
         <div id="page-openai" class="content-page">
-            <h2 class="page-title">استراتيجيات OpenAI المتقدمة لنتائج مبهرة</h2>
+            <!-- ... (محتوى الصفحة الثانية كما هو) ... -->
+             <h2 class="page-title">استراتيجيات OpenAI المتقدمة لنتائج مبهرة</h2>
             <p class="intro-text">تقدم OpenAI مجموعة من الاستراتيجيات التي أثبتت فعاليتها في تحسين جودة المخرجات من نماذجها اللغوية. تطبيق هذه الاستراتيجيات يفتح آفاقًا جديدة للإبداع والدقة.</p>
             <div class="openai-strategies">
                 <div class="card-item strategy-card">
@@ -518,6 +544,7 @@
 
         <!-- الصفحة الثالثة: نصائح إضافية -->
         <div id="page-tips" class="content-page">
+            <!-- ... (محتوى الصفحة الثالثة كما هو) ... -->
             <h2 class="page-title">نصائح الخبراء الذهبية وخلاصة شاملة</h2>
             <p class="intro-text">بالإضافة إلى الأطر والاستراتيجيات المذكورة، هناك العديد من النصائح العملية التي يوصي بها الخبراء لتحسين جودة الأوامر. هذه النصائح هي خلاصة تجارب عملية ومفتاحك لنتائج احترافية.</p>
             <div class="expert-tips">
@@ -540,12 +567,12 @@
     <footer>
         <p>تصميم وتطوير: <strong>إسلام محمد</strong></p>
         <p><a href="mailto:eslam.mohamed@nagwa.com">eslam.mohamed@nagwa.com</a></p>
-        <p>&copy; 2024 - جميع الحقوق محفوظة لدليل صياغة الأوامر الذكية.</p>
+        <p>© 2024 - جميع الحقوق محفوظة لدليل صياغة الأوامر الذكية.</p>
     </footer>
 
     <script>
-        // JavaScript code remains the same as the previous version.
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Accordion Logic ---
             const interactiveItems = document.querySelectorAll('.card-item');
             interactiveItems.forEach(item => {
                 const titleElement = item.querySelector('h3');
@@ -575,6 +602,7 @@
                 }
             });
 
+            // --- Page Navigation Logic ---
             const navLinks = document.querySelectorAll('nav ul li a');
             const contentPages = document.querySelectorAll('.content-page');
 
@@ -592,9 +620,6 @@
                         link.classList.add('active');
                     }
                 });
-                // Scroll to top only if not clicking on an accordion or similar interactive element within the page
-                // For simplicity, we scroll on every page change.
-                // For more complex scenarios, you might want to check the event target.
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
 
@@ -607,6 +632,51 @@
                     }
                 });
             });
+
+            // --- Custom Audio Player Logic ---
+            const audioPlayer = document.getElementById('pageSummaryAudio');
+            const playPauseButton = document.getElementById('playPauseBtn');
+            const playIcon = playPauseButton.querySelector('.play-icon'); // الأيقونة داخل الزر
+            const buttonText = playPauseButton.querySelector('.button-text'); // النص داخل الزر
+
+            if (audioPlayer && playPauseButton) {
+                playPauseButton.addEventListener('click', () => {
+                    if (audioPlayer.paused || audioPlayer.ended) {
+                        audioPlayer.play();
+                        playPauseButton.classList.add('playing');
+                        if(playIcon) playIcon.textContent = '⏸️'; // أيقونة إيقاف مؤقت
+                        if(buttonText) buttonText.textContent = 'إيقاف الملخص';
+                    } else {
+                        audioPlayer.pause();
+                        playPauseButton.classList.remove('playing');
+                        if(playIcon) playIcon.textContent = '▶️'; // أيقونة تشغيل
+                        if(buttonText) buttonText.textContent = 'تشغيل الملخص';
+                    }
+                });
+
+                // تحديث الزر عند انتهاء تشغيل الصوت
+                audioPlayer.addEventListener('ended', () => {
+                    playPauseButton.classList.remove('playing');
+                    if(playIcon) playIcon.textContent = '▶️';
+                    if(buttonText) buttonText.textContent = 'تشغيل الملخص';
+                    audioPlayer.currentTime = 0; // إعادة الصوت للبداية إذا أردت
+                });
+
+                // اختياري: تحديث الزر إذا تم إيقاف الصوت من مكان آخر (نادراً ما يحدث بدون controls)
+                audioPlayer.addEventListener('pause', () => {
+                    // التأكد من أن الإيقاف لم يكن بسبب انتهاء التشغيل (الذي يتم التعامل معه أعلاه)
+                    if (!audioPlayer.ended) {
+                        playPauseButton.classList.remove('playing');
+                        if(playIcon) playIcon.textContent = '▶️';
+                        if(buttonText) buttonText.textContent = 'تشغيل الملخص';
+                    }
+                });
+                 audioPlayer.addEventListener('play', () => {
+                    playPauseButton.classList.add('playing');
+                    if(playIcon) playIcon.textContent = '⏸️';
+                    if(buttonText) buttonText.textContent = 'إيقاف الملخص';
+                });
+            }
         });
     </script>
 </body>
